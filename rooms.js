@@ -5,8 +5,6 @@ const fetchRoomsData = async () => {
   const result = await data.json();
   allRooms=result
   displayRoomsData(result);
-
-  console.log(result)
 };
 
 fetchRoomsData();

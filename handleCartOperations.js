@@ -2,20 +2,22 @@ const addToCart = async (id) => {
   const data = await fetch(`ROOMS.json`);
   const result = await data.json();
   const { name, summary, property_type, images,number_of_reviews,price,_id} = result.find((item) => item._id == id);
-  const cartItems=getItemsFromStorage()
-  
-  
+  const cartItems=getItemsFromStorage();
+  if(cartItems.find((item) => item._id == id)){
+    return;
+  }
   cartItems.push({ name, summary, property_type, images,number_of_reviews,price,_id});
   localStorage.setItem('saved-Cart', JSON.stringify(cartItems))
-  //const cartItemsContainer = document.getElementById("cart-items");
+  displayCartItems()
 };
 
 const getItemsFromStorage = () => {
   let itemsArray = [];
-  const cartItems = localStorage.getItem("savedCart");
+  const cartItems = localStorage.getItem("saved-Cart");
   if (cartItems) {
-    itemsArray = (cartItems);
+    itemsArray = JSON.parse(cartItems);
   }
+  // console.log(itemsArray)
   return itemsArray;
 };
 
@@ -26,7 +28,7 @@ const displayCartItems=()=>{
     const cartItems=getItemsFromStorage()
     cartItemsContainer.innerHTML=""
     cartItems?.forEach((item)=>{
-        const { name, property_type, images,number_of_reviews,price,_id}=item
+        const { name, property_type, images,number_of_reviews,price,_id}=item ;
         cartItemsContainer.innerHTML += `
         <tr>
         <th scope="row">${name.slice(0,26)}</th>
@@ -42,6 +44,7 @@ const displayCartItems=()=>{
     })
    
 }
+
 displayCartItems()
 
 const deleteItemFromCart=(id)=>{
