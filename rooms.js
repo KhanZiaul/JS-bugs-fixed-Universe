@@ -17,7 +17,7 @@ const displayRoomsData = async (rooms) => {
   roomsContainer.innerHTML=''
   rooms.forEach((room) => {
     const { name, summary, property_type, images,number_of_reviews,price,_id } = room;
-    // console.log(images.picture_url);
+    // console.log(price);
     roomsContainer.innerHTML += `
  <div class="col">
  <div class="card h-100">
@@ -31,8 +31,7 @@ const displayRoomsData = async (rooms) => {
      <p class="card-text">${property_type}</p>
      <p class="card-text">${summary}</p>
    </div>
-   <button class="btn btn-info btn-lg"  role="button" onclick='addToCart(${_id})'
-                >Add to cart</button>
+   <button class="btn btn-info btn-lg"  role="button" onclick='addToCart(${_id})'>Add to cart</button>
  </div>
 </div>
  `;
@@ -42,11 +41,10 @@ const displayRoomsData = async (rooms) => {
 
 const range = document.getElementById("review-range");
 range.addEventListener("input", () => {
-  const value = range.Value;
-
+  const value = range.value;
   document.getElementById('review-count').innerText = value
-  const filteredData= allRooms.filter( r.number_of_reviews >= value)
-  displayRoomsData(allRooms) 
+  const filteredData= allRooms.filter(r => r.number_of_reviews >= value)
+  displayRoomsData(filteredData) 
 });
 
 
