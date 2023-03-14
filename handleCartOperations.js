@@ -28,7 +28,7 @@ const displayCartItems=()=>{
     const cartItems=getItemsFromStorage()
     cartItemsContainer.innerHTML=""
     cartItems?.forEach((item)=>{
-        const { name, property_type, images,number_of_reviews,price,_id}=item ;
+        const { name,_id}=item ;
         cartItemsContainer.innerHTML += `
         <tr>
         <th scope="row">${name.slice(0,26)}</th>
@@ -48,8 +48,10 @@ const displayCartItems=()=>{
 displayCartItems()
 
 const deleteItemFromCart=(id)=>{
+  console.log('click')
     const cartItems=getItemsFromStorage()
-    const filteredItems=cartItems.filter((item)=>item._id==id)
-    localStorage.setItem('savedCart', JSON.stringify(filteredItems))
+    const filteredItems=cartItems.filter((item)=>item._id != id)
+    console.log(filteredItems)
+    localStorage.setItem('saved-Cart', JSON.stringify(filteredItems))
     displayCartItems()
 }
