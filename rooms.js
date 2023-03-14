@@ -5,6 +5,8 @@ const fetchRoomsData = async () => {
   const result = await data.json();
   allRooms=result
   displayRoomsData(result);
+
+  console.log(result)
 };
 
 fetchRoomsData();
@@ -15,10 +17,11 @@ const displayRoomsData = async (rooms) => {
   roomsContainer.innerHTML=''
   rooms.forEach((room) => {
     const { name, summary, property_type, images,number_of_reviews,price,_id } = room;
+    // console.log(images.picture_url);
     roomsContainer.innerHTML += `
  <div class="col">
  <div class="card h-100">
-   <img src=${images.picture_Url} class="card-img-top " alt="..." style=" height: 300px;
+   <img src=${images.picture_url} class="card-img-top " alt="..." style=" height: 300px;
    object-fit: fill;">
    <div class="card-body">
      <h5 class="card-title">${name}</h5>
@@ -35,9 +38,6 @@ const displayRoomsData = async (rooms) => {
  `;
   });
 };
-
-
-
 
 
 const range = document.getElementById("review-range");

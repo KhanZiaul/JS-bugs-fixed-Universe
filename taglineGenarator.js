@@ -73,7 +73,3 @@ document
     document.getElementById('review').appendChild(reviews);
 
   });
-
-
-
- 
